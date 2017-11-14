@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--设置浏览器的布局视口，只在移动端浏览器起作用-->
+		<meta name="viewport" content="width=width-device,initial-scale=1,user-scalable=no" />
+		<title></title>
+		<!--引入bootstrap的核心css-->
+		<link rel="stylesheet" href="js/bootstrap/css/bootstrap.css" />
+		<!--引入日历css-->
+		<link rel="stylesheet" href="js/datetimepicker/jquery.datetimepicker.css" />
+
+		<!--判断如果是IE9以下，引入兼容h5标签的js文件，注意空格的位置-->
+		<!--[if lt IE 9]>
+		<script src="js/bootstrap/js/html5shiv.min.js"></script>
+		<script src="js/bootstrap/js/respond.min.js"></script>		
+		<![end if] -->
+	</head>
+
+	<body>
+		<div class="container">
+
+			<h2 class="page-header">员工详情</h2>
+
+			<form id="form1" class="form-horizontal">
+				<div class="form-group">
+					<label for="" class="col-md-2">员工姓名</label>
+					<div class="col-md-10">
+						<input id="empName" name="empName" placeholder="请输入员工名称" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">登录账号</label>
+					<div class="col-md-10">
+						<input id="empLoginName" readonly name="empLoginName" placeholder="请输入登录账号" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">电子邮件</label>
+					<div class="col-md-10">
+						<input id="empEmail" readonly name="empEmail" placeholder="请输入电子邮件" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">电话号码</label>
+					<div class="col-md-10">
+						<input id="empPhone" name="empPhone" placeholder="请输入电话号码" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">员工工资</label>
+					<div class="col-md-10">
+						<input id="empSalary" name="empSalary" placeholder="请输入员工工资" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">入职日期</label>
+					<div class="col-md-10">
+						<input id="empHiredate" readonly name="empHiredate" type="text" placeholder="请选择入职日期" readonly class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">部门</label>
+					<div class="col-md-10">
+						<select name="deptId" id="deptId" class="form-control">
+							<option value="">请选择部门</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">职务</label>
+					<div class="col-md-10">
+						<select name="jobId" id="jobId" class="form-control">
+							<option value="">请选择职务</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">员工简介</label>
+					<div class="col-md-10">
+						<textarea name="empInfo" id="empInfo" rows="5" cols="" class="form-control" placeholder="请输入员工备注介绍"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-10 col-md-offset-2">
+						<input type="hidden" id="empId" name="empId" />
+						<input type="button" value="修改" class="btn btn-success" id="UpdateBtn" />
+						<input type="button" class="btn btn-danger" value="取消" onclick="window.parent.layer.closeAll();" />
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!--引入jquery-->
+		<script src="js/jquery.js"></script>
+		<!--全局公共js-->
+		<script src="js/global.js"></script>
+		<!--引用参数工具js-->
+		<script type="text/javascript" src="js/param.js" ></script>
+		<!--引入bootstrap的js功能-->
+		<script src="js/bootstrap/js/bootstrap.js"></script>
+		<!--引入layer插件-->
+		<script type="text/javascript" src="js/layer/layer.js"></script>
+		<!--引入增加员工js--> 
+		<script type="text/javascript" src="js/UpdateEmp.js" ></script>
+	</body>
+
+</html>

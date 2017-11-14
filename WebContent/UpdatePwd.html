@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--设置浏览器的布局视口，只在移动端浏览器起作用-->
+		<meta name="viewport" content="width=width-device,initial-scale=1,user-scalable=no" />
+		<title></title>
+		<!--引入bootstrap的核心css-->
+		<link rel="stylesheet" href="js/bootstrap/css/bootstrap.css" />
+
+		<!--判断如果是IE9以下，引入兼容h5标签的js文件，注意空格的位置-->
+		<!--[if lt IE 9]>
+		<script src="js/bootstrap/js/html5shiv.min.js"></script>
+		<script src="js/bootstrap/js/respond.min.js"></script>		
+		<![end if] -->
+	</head>
+
+	<body>
+		<div class="container">
+
+			<ol class="breadcrumb">
+				<li>
+					<a href="#">人力资源管理系统</a>
+				</li>
+				<li>
+					<a href="#">密码管理</a>
+				</li>
+				<li>修改密码</li>
+			</ol>
+
+			<h2 class="page-header">修改密码</h2>
+
+			<form id="form1" class="form-horizontal">
+				<div class="form-group">
+					<label for="" class="col-md-2">旧密码</label>
+					<div class="col-md-10">
+						<input id="empPwd" name="empPwd" placeholder="请输入旧密码" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">新密码</label>
+					<div class="col-md-10">
+						<input id="empNewPwd" name="empNewPwd" placeholder="请输入新密码" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-md-2">确认密码</label>
+					<div class="col-md-10">
+						<input id="checkPwd" placeholder="请输入新密码" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-10 col-md-offset-2">
+						<input type="button" value="立即修改" class="btn btn-success" id="updateBtn" />
+						<input type="button" class="btn btn-danger" value="取消" onclick="history.back();" />
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!--引入jquery-->
+		<script src="js/jquery.js"></script>
+		<!--全局公共js-->
+		<script src="js/global.js"></script>
+		<!--引入bootstrap的js功能-->
+		<script src="js/bootstrap/js/bootstrap.js"></script>
+		<!--引入layer插件-->
+		<script type="text/javascript" src="js/layer/layer.js"></script>
+
+		<script>
+			
+			$(function() {
+							
+				var result = true;
+						
+				$('#updateBtn').click(function(){
+					
+					
+				var empOldPwd = $('#empPwd').val();
+				var empNewPwd = $('#empNewPwd').val();
+				var checkPwd = $('#checkPwd').val();
+				
+					
+					if( !checkLoginPwd() ) {
+						
+						return;
+					}
+					
+
+					var params = {
+						empPwd:empNewPwd
+					}
+					
+					$.ajax({
+						type:"POST",
+						url:baseUrl + "/UpdateEmpPwdServlet",
+						data:params
+					})
+					.done(function(data) {
+						
+						console.log(data)
+						layer.msg('修改成功！');
+						
+						setTimeout(function(){
+							location.href = 'login.html'
+							
+						},500);
+					})
+					.error(function(xhr, errorStatus, errorText) {
+						layer.msg('请求失败，' + errorText + ',' + xhr.status);
+					});
+		
+				});
+
+				function checkLoginPwd() {
+					
+				var empOldPwd = $('#empPwd').val();
+				var empNewPwd = $('#empNewPwd').val();
+				var checkPwd = $('#checkPwd').val();
+					
+					$.getJSON(baseUrl + '/QueryEmpByLoginNameServlet',function(data) {
+					
+					console.log(empOldPwd);
+					
+						if (empOldPwd != data.empPwd) {
+							layer.msg('请输入正确的旧密码！');
+							result = false;
+						}else if (empNewPwd != checkPwd) {
+							layer.msg('两次密码输入不同！');
+							result = false;
+						}
+						
+					})
+					.fail(function(xhr, errorStatus, errorText) {
+						layer.msg('请求失败，' + errorText + ',' + xhr.status);
+						result = false;
+					});
+					
+					if (!result){
+						return false;
+					}
+					
+					return true;
+				}
+
+			});
+	
+		</script>
+
+	</body>
+
+</html>
